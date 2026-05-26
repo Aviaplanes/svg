@@ -22,11 +22,3 @@
 
 <br>
 
-<!-- СТАТИСТИКА GITHUB (Стилизована под новый HUD) -->
-<div align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=0xavia&show_icons=true&theme=radical&hide_border=true&bg_color=050508&title_color=ff2a2a&icon_color=ff2a2a&text_color=ffffff&ring_color=ff2a2a&border_radius=0" height="165" />
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=0xavia&theme=radical&hide_border=true&background=050508&ring=ff2a2a&fire=ff2a2a&currStreakLabel=ff2a2a&sideLabels=ffffff&dates=4a0000&border_radius=0" height="165" />
-</div>
-
-<br>
-
