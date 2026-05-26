@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="380" height="100" viewBox="0 0 380 100">
+  <defs>
+    <style>
+      @keyframes breathe { 0%, 100% { opacity: 0.4; filter: drop-shadow(0 0 2px #a89f8d); } 50% { opacity: 1; filter: drop-shadow(0 0 8px #e6e2db); } }
+      @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+      .halo { transform-origin: 50px 50px; animation: spin-slow 40s linear infinite; }
+      .glow { animation: breathe 6s ease-in-out infinite; }
+      .text-title { font-family: 'Cinzel', 'Georgia', serif; font-size: 11px; fill: #8c8473; letter-spacing: 4px; }
+      .text-main { font-family: 'Cinzel', 'Georgia', serif; font-size: 20px; fill: #2a2a2e; font-weight: bold; letter-spacing: 2px; transition: fill 0.5s; }
+      .btn:hover .text-main { fill: #a89f8d; }
+      .btn { cursor: pointer; }
+    </style>
+
+    <!-- Фарфоровая текстура -->
+    <filter id="porcelain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.05 0" in="noise" result="coloredNoise" />
+      <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" />
+    </filter>
+
+    <linearGradient id="plate-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f2efe9" />
+      <stop offset="50%" stop-color="#e6e2db" />
+      <stop offset="100%" stop-color="#d1ccc3" />
+    </linearGradient>
+
+    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c5bca8" />
+      <stop offset="100%" stop-color="#8c8473" />
+    </linearGradient>
+  </defs>
+
+  <g class="btn">
+    <!-- Фон пустоты -->
+    <rect width="380" height="100" fill="#121214" />
+
+    <!-- Фарфоровая плита -->
+    <path d="M 15 10 L 365 10 L 370 15 L 370 85 L 365 90 L 15 90 L 10 85 L 10 15 Z" fill="url(#plate-grad)" filter="url(#porcelain)" />
+    
+    <!-- Трещины (Kintsugi style) -->
+    <path d="M 10 30 L 25 35 L 30 50 L 22 65" fill="none" stroke="#a89f8d" stroke-width="0.7" opacity="0.6" />
+    <path d="M 370 70 L 355 68 L 345 80" fill="none" stroke="#a89f8d" stroke-width="0.5" opacity="0.4" />
+    <path d="M 120 10 L 125 20 L 122 25" fill="none" stroke="#8c8473" stroke-width="0.5" opacity="0.5" />
+
+    <!-- Декоративная рамка -->
+    <path d="M 20 18 L 360 18 L 362 20 L 362 80 L 360 82 L 20 82 L 18 80 L 18 20 Z" fill="none" stroke="#a89f8d" stroke-width="1" opacity="0.3" />
+
+    <!-- Иконка: Нимб и Око -->
+    <g transform="translate(0, 0)">
+      <circle cx="50" cy="50" r="22" fill="none" stroke="#d1ccc3" stroke-width="2" />
+      <circle class="halo" cx="50" cy="50" r="22" fill="none" stroke="url(#gold-grad)" stroke-width="1.5" stroke-dasharray="10 30" />
+      
+      <!-- Геометрическое око -->
+      <path d="M 35 50 Q 50 35 65 50 Q 50 65 35 50 Z" fill="none" stroke="#3a3a40" stroke-width="1.5" />
+      <circle class="glow" cx="50" cy="50" r="4" fill="#a89f8d" />
+      
+      <!-- Слеза -->
+      <path d="M 50 58 L 52 63 Q 50 66 48 63 Z" fill="#8c8473" opacity="0.7" />
+    </g>
+
+    <!-- Разделитель -->
+    <line x1="95" y1="25" x2="95" y2="75" stroke="#a89f8d" stroke-width="1" opacity="0.4" />
+    <polygon points="95,20 97,25 93,25" fill="#a89f8d" opacity="0.6" />
+    <polygon points="95,80 97,75 93,75" fill="#a89f8d" opacity="0.6" />
+
+    <!-- Текст -->
+    <text x="115" y="40" class="text-title">SANCTUARY</text>
+    <text x="115" y="68" class="text-main">0xavia.xyz</text>
+    
+    <!-- Латинский акцент -->
+    <text x="350" y="75" font-family="'Georgia', serif" font-size="8" fill="#a89f8d" font-style="italic" text-anchor="end" opacity="0.6">Lapsus</text>
+  </g>
+</svg>
