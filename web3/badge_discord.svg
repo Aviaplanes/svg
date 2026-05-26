@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120">
+  <defs>
+    <style>
+      @keyframes pulse-node { 0%, 100% { r: 3; opacity: 0.5; } 50% { r: 5; opacity: 1; filter: drop-shadow(0 0 6px #B026FF); } }
+      @keyframes data-flow { 0% { stroke-dashoffset: 20; } 100% { stroke-dashoffset: 0; } }
+      @keyframes float-reverse { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(4px); } }
+      
+      .node { animation: pulse-node 2s ease-in-out infinite; }
+      .node-delay { animation: pulse-node 2s ease-in-out infinite 1s; }
+      .data-line { stroke-dasharray: 4 16; animation: data-flow 1s linear infinite; }
+      .hex-core { animation: float-reverse 5s ease-in-out infinite; transform-origin: 60px 60px; }
+      
+      .btn { cursor: pointer; }
+      .btn:hover .glass-bg { fill: rgba(30, 15, 40, 0.85); }
+      .btn:hover .accent-line { stroke: #FF007F; }
+      
+      .title { font-family: 'Inter', 'Segoe UI', sans-serif; font-size: 10px; fill: #8A7B9C; letter-spacing: 3px; font-weight: 600; }
+      .main { font-family: 'JetBrains Mono', monospace; font-size: 22px; fill: #FFFFFF; font-weight: 800; letter-spacing: 1px; }
+      .data { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #B026FF; opacity: 0.8; }
+    </style>
+
+    <linearGradient id="glass-grad-dao" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(176, 38, 255, 0.1)" />
+      <stop offset="100%" stop-color="rgba(255, 0, 127, 0.05)" />
+    </linearGradient>
+    
+    <linearGradient id="holo-stroke-dao" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B026FF" />
+      <stop offset="100%" stop-color="#FF007F" />
+    </linearGradient>
+
+    <filter id="neon-purple" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="blur1" />
+      <feGaussianBlur stdDeviation="6" result="blur2" />
+      <feMerge><feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="glass-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <pattern id="grid-dao" width="10" height="10" patternUnits="userSpaceOnUse">
+      <path d="M 10 0 L 0 0 0 10" fill="none" stroke="#B026FF" stroke-width="0.5" opacity="0.1"/>
+    </pattern>
+
+    <clipPath id="card-clip-dao">
+      <rect x="10" y="10" width="380" height="100" rx="16" />
+    </clipPath>
+  </defs>
+
+  <g class="btn">
+    <rect width="400" height="120" fill="#05050A" />
+    
+    <rect class="glass-bg" x="10" y="10" width="380" height="100" rx="16" fill="rgba(10, 10, 20, 0.7)" filter="url(#glass-shadow)" />
+    <rect x="10" y="10" width="380" height="100" rx="16" fill="url(#glass-grad-dao)" stroke="url(#holo-stroke-dao)" stroke-width="1.5" />
+    <rect x="10" y="10" width="380" height="100" rx="16" fill="url(#grid-dao)" />
+    
+    <path d="M 10 26 Q 10 10 26 10 L 374 10 Q 390 10 390 26 L 390 40 Q 200 60 10 30 Z" fill="#FFFFFF" opacity="0.03" clip-path="url(#card-clip-dao)" />
+
+    <!-- Иконка: DAO Network (Гексагональная сеть) -->
+    <g class="hex-core" filter="url(#neon-purple)">
+      <!-- Соединительные линии -->
+      <path d="M 60 35 L 82 47 L 82 71 L 60 83 L 38 71 L 38 47 Z" fill="none" stroke="#B026FF" stroke-width="1.5" opacity="0.4" />
+      <path d="M 60 60 L 60 35 M 60 60 L 82 47 M 60 60 L 82 71 M 60 60 L 60 83 M 60 60 L 38 71 M 60 60 L 38 47" fill="none" stroke="#FF007F" stroke-width="1" opacity="0.6" />
+      
+      <!-- Анимированные потоки данных -->
+      <path class="data-line" d="M 60 60 L 60 35 M 60 60 L 82 47 M 60 60 L 82 71 M 60 60 L 60 83 M 60 60 L 38 71 M 60 60 L 38 47" fill="none" stroke="#FFFFFF" stroke-width="2" />
+
+      <!-- Узлы (Nodes) -->
+      <circle cx="60" cy="60" r="6" fill="#05050A" stroke="#B026FF" stroke-width="2" />
+      <circle cx="60" cy="60" r="2" fill="#FFFFFF" />
+      
+      <circle class="node" cx="60" cy="35" r="3" fill="#FF007F" />
+      <circle class="node-delay" cx="82" cy="47" r="3" fill="#B026FF" />
+      <circle class="node" cx="82" cy="71" r="3" fill="#FF007F" />
+      <circle class="node-delay" cx="60" cy="83" r="3" fill="#B026FF" />
+      <circle class="node" cx="38" cy="71" r="3" fill="#FF007F" />
+      <circle class="node-delay" cx="38" cy="47" r="3" fill="#B026FF" />
+    </g>
+
+    <line class="accent-line" x1="110" y1="30" x2="110" y2="90" stroke="#B026FF" stroke-width="1" opacity="0.3" stroke-dasharray="2 4" />
+
+    <text x="130" y="40" class="title">GOVERNANCE PORTAL</text>
+    <text x="130" y="72" class="main">JOIN THE DAO</text>
+    
+    <text x="130" y="92" class="data">PROPOSALS: 14 ACTIVE | QUORUM: 68% | TREASURY: $1.2M</text>
+    
+    <g transform="translate(350, 30)">
+      <circle cx="0" cy="0" r="3" fill="#B026FF" filter="url(#neon-purple)"/>
+      <text x="-10" y="3" font-family="monospace" font-size="8" fill="#8A7B9C" text-anchor="end">CONSENSUS</text>
+    </g>
+  </g>
+</svg>
