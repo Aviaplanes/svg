@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="775" height="280" viewBox="0 0 775 280">
+  <defs>
+    <style>
+      @keyframes fill-rust { from { width: 0; } to { width: 416px; } } /* 86.73% of 480 */
+      @keyframes fill-py { from { width: 0; } to { width: 40px; } }   /* 8.45% */
+      @keyframes fill-js { from { width: 0; } to { width: 23px; } }   /* 4.82% */
+      
+      .bar-rust { animation: fill-rust 3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+      .bar-py { animation: fill-py 3s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s forwards; width: 0; }
+      .bar-js { animation: fill-js 3s cubic-bezier(0.2, 0.8, 0.2, 1) 1s forwards; width: 0; }
+      
+      @keyframes pulse-slow { 0%, 100% { opacity: 0.03; } 50% { opacity: 0.08; } }
+      .bg-glow { animation: pulse-slow 10s ease-in-out infinite; }
+
+      .row { cursor: default; }
+      .row:hover .lang-name { fill: #a89f8d; }
+      .row:hover .lang-val { fill: #2a2a2e; font-weight: bold; }
+      
+      .text-header { font-family: 'Cinzel', 'Georgia', serif; font-size: 14px; fill: #8c8473; letter-spacing: 6px; }
+      .lang-name { font-family: 'Cinzel', 'Georgia', serif; font-size: 16px; fill: #3a3a40; letter-spacing: 2px; transition: all 0.5s; }
+      .lang-val { font-family: 'Courier New', monospace; font-size: 14px; fill: #8c8473; transition: all 0.5s; }
+      .lang-num { font-family: 'Georgia', serif; font-size: 12px; fill: #a89f8d; font-style: italic; }
+    </style>
+
+    <filter id="porcelain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="4" result="noise" />
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.06 0" in="noise" result="coloredNoise" />
+      <feBlend in="SourceGraphic" in2="coloredNoise" mode="multiply" />
+    </filter>
+
+    <linearGradient id="plate-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f2efe9" />
+      <stop offset="100%" stop-color="#d1ccc3" />
+    </linearGradient>
+
+    <linearGradient id="ichor-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d1ccc3" />
+      <stop offset="50%" stop-color="#a89f8d" />
+      <stop offset="100%" stop-color="#e6e2db" />
+    </linearGradient>
+  </defs>
+
+  <!-- Фон пустоты -->
+  <rect width="775" height="280" fill="#121214" />
+
+  <!-- Фарфоровая плита -->
+  <path d="M 20 15 L 755 15 L 765 25 L 765 255 L 755 265 L 20 265 L 10 255 L 10 25 Z" fill="url(#plate-grad)" filter="url(#porcelain)" />
+  
+  <!-- Трещины -->
+  <path d="M 10 100 L 30 105 L 35 130 L 25 150" fill="none" stroke="#a89f8d" stroke-width="0.8" opacity="0.5" />
+  <path d="M 765 200 L 740 195 L 730 210" fill="none" stroke="#8c8473" stroke-width="0.6" opacity="0.4" />
+  <path d="M 400 15 L 405 30 L 395 45" fill="none" stroke="#a89f8d" stroke-width="0.5" opacity="0.5" />
+
+  <!-- Фоновая Готическая Арка (Водяной знак) -->
+  <g stroke="#a89f8d" fill="none" opacity="0.1" stroke-width="1.5">
+    <path d="M 387 265 L 387 120 A 100 100 0 0 1 587 120 L 587 265" />
+    <path d="M 417 265 L 417 140 A 70 70 0 0 1 557 140 L 557 265" />
+    <circle cx="487" cy="100" r="30" />
+    <circle class="bg-glow" cx="487" cy="100" r="80" fill="#a89f8d" stroke="none" />
+  </g>
+
+  <!-- Внутренняя рамка -->
+  <path d="M 30 25 L 745 25 L 750 30 L 750 250 L 745 255 L 30 255 L 25 250 L 25 30 Z" fill="none" stroke="#a89f8d" stroke-width="1" opacity="0.4" />
+
+  <!-- Заголовок -->
+  <text x="387" y="55" class="text-header" text-anchor="middle">DIVINE PROPORTIONS</text>
+  <line x1="250" y1="70" x2="525" y2="70" stroke="#a89f8d" stroke-width="1" opacity="0.5" />
+  <polygon points="387,67 390,70 387,73 384,70" fill="#8c8473" />
+
+  <!-- Данные -->
+  <g transform="translate(60, 100)">
+    
+    <!-- I. RUST -->
+    <g class="row">
+      <text x="0" y="15" class="lang-num">I.</text>
+      <text x="25" y="15" class="lang-name">RUST</text>
+      <text x="655" y="15" class="lang-val" text-anchor="end">86.73%</text>
+      
+      <!-- Вырезанный желоб -->
+      <rect x="0" y="25" width="655" height="8" fill="#c5bca8" opacity="0.3" rx="4" />
+      <rect x="0" y="25" width="655" height="8" fill="none" stroke="#a89f8d" stroke-width="0.5" rx="4" />
+      <!-- Заполнение светом -->
+      <rect class="bar-rust" x="0" y="25" height="8" fill="url(#ichor-grad)" rx="4" filter="drop-shadow(0 0 3px #a89f8d)" />
+    </g>
+
+    <!-- II. PYTHON -->
+    <g class="row" transform="translate(0, 60)">
+      <text x="0" y="15" class="lang-num">II.</text>
+      <text x="30" y="15" class="lang-name">PYTHON</text>
+      <text x="655" y="15" class="lang-val" text-anchor="end">8.45%</text>
+      
+      <rect x="0" y="25" width="655" height="8" fill="#c5bca8" opacity="0.3" rx="4" />
+      <rect x="0" y="25" width="655" height="8" fill="none" stroke="#a89f8d" stroke-width="0.5" rx="4" />
+      <rect class="bar-py" x="0" y="25" height="8" fill="url(#ichor-grad)" rx="4" />
+    </g>
+
+    <!-- III. JAVASCRIPT -->
+    <g class="row" transform="translate(0, 120)">
+      <text x="0" y="15" class="lang-num">III.</text>
+      <text x="35" y="15" class="lang-name">JAVASCRIPT</text>
+      <text x="655" y="15" class="lang-val" text-anchor="end">4.82%</text>
+      
+      <rect x="0" y="25" width="655" height="8" fill="#c5bca8" opacity="0.3" rx="4" />
+      <rect x="0" y="25" width="655" height="8" fill="none" stroke="#a89f8d" stroke-width="0.5" rx="4" />
+      <rect class="bar-js" x="0" y="25" height="8" fill="url(#ichor-grad)" rx="4" />
+    </g>
+
+  </g>
+
+  <!-- Нижний акцент -->
+  <text x="387" y="245" font-family="'Georgia', serif" font-size="9" fill="#a89f8d" font-style="italic" text-anchor="middle" letter-spacing="3" opacity="0.7">Veritas in Numeris</text>
+</svg>
