@@ -30,16 +30,3 @@
 
 <br>
 
-```text
-> EXECUTING PROFILE_SCAN...
-[OK] Identity verified.
-[OK] Loading modules...
-
-I build high-performance, low-level systems. 
-No mercy for bad code. Proprietary logic locked.
-```
-
-<br>
-<div align="center">
-  <sub>// SYS.DIAGNOSTICS // UPLINK ESTABLISHED //</sub>
-</div>
