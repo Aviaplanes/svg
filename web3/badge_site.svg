@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120">
+  <defs>
+    <style>
+      @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-6px); } }
+      @keyframes scan { 0% { transform: translateX(-50px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(450px); opacity: 0; } }
+      @keyframes pulse-glow { 0%, 100% { filter: drop-shadow(0 0 5px #00F0FF); } 50% { filter: drop-shadow(0 0 15px #00F0FF); } }
+      @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+      
+      .cube { animation: float 4s ease-in-out infinite; transform-origin: 60px 60px; }
+      .scanner { animation: scan 3s linear infinite; }
+      .holo-ring { transform-origin: 60px 60px; animation: spin-slow 10s linear infinite; }
+      .glow-text { animation: pulse-glow 3s ease-in-out infinite; }
+      
+      .btn { cursor: pointer; }
+      .btn:hover .glass-bg { fill: rgba(20, 25, 40, 0.85); }
+      .btn:hover .accent-line { stroke: #B026FF; }
+      
+      .title { font-family: 'Inter', 'Segoe UI', sans-serif; font-size: 10px; fill: #6A7B9C; letter-spacing: 3px; font-weight: 600; }
+      .main { font-family: 'JetBrains Mono', monospace; font-size: 22px; fill: #FFFFFF; font-weight: 800; letter-spacing: 1px; }
+      .data { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #00F0FF; opacity: 0.7; }
+    </style>
+
+    <!-- Градиенты -->
+    <linearGradient id="glass-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.08)" />
+      <stop offset="50%" stop-color="rgba(255,255,255,0.02)" />
+      <stop offset="100%" stop-color="rgba(255,255,255,0.05)" />
+    </linearGradient>
+    
+    <linearGradient id="holo-stroke" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F0FF" />
+      <stop offset="50%" stop-color="#B026FF" />
+      <stop offset="100%" stop-color="#FF007F" />
+    </linearGradient>
+
+    <linearGradient id="cube-top" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0088FF" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="cube-left" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0055AA" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#001133" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="cube-right" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0088FF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#002255" stop-opacity="0.9"/>
+    </linearGradient>
+
+    <linearGradient id="scan-grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00F0FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00F0FF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00F0FF" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Фильтры -->
+    <filter id="neon-cyan" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur1" />
+      <feGaussianBlur stdDeviation="8" result="blur2" />
+      <feMerge><feMergeNode in="blur2"/><feMergeNode in="blur1"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <filter id="glass-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="10" stdDeviation="15" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+
+    <!-- Паттерны -->
+    <pattern id="dot-matrix" width="4" height="4" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="0.5" fill="#FFFFFF" opacity="0.1"/>
+    </pattern>
+    
+    <clipPath id="card-clip">
+      <rect x="10" y="10" width="380" height="100" rx="16" />
+    </clipPath>
+  </defs>
+
+  <g class="btn">
+    <!-- База (Тень и фон) -->
+    <rect width="400" height="120" fill="#05050A" />
+    
+    <!-- Стеклянная карточка -->
+    <rect class="glass-bg" x="10" y="10" width="380" height="100" rx="16" fill="rgba(10, 12, 20, 0.7)" filter="url(#glass-shadow)" />
+    <rect x="10" y="10" width="380" height="100" rx="16" fill="url(#glass-grad)" stroke="url(#holo-stroke)" stroke-width="1.5" />
+    <rect x="10" y="10" width="380" height="100" rx="16" fill="url(#dot-matrix)" />
+    
+    <!-- Внутренний блик стекла -->
+    <path d="M 10 26 Q 10 10 26 10 L 374 10 Q 390 10 390 26 L 390 40 Q 200 60 10 30 Z" fill="#FFFFFF" opacity="0.03" clip-path="url(#card-clip)" />
+
+    <!-- Декор: Печатная плата -->
+    <path d="M 360 90 L 340 90 L 330 80 L 330 60" fill="none" stroke="#1A2035" stroke-width="2" />
+    <circle cx="330" cy="60" r="2" fill="#1A2035" />
+    <path d="M 370 80 L 350 80 L 340 70 L 340 50" fill="none" stroke="#1A2035" stroke-width="2" />
+    <circle cx="340" cy="50" r="2" fill="#1A2035" />
+
+    <!-- Иконка: Изометрический Блокчейн-куб -->
+    <g class="cube">
+      <!-- Голографическое кольцо вокруг -->
+      <ellipse class="holo-ring" cx="60" cy="65" rx="30" ry="12" fill="none" stroke="#B026FF" stroke-width="1" stroke-dasharray="4 4" opacity="0.6" filter="url(#neon-cyan)"/>
+      
+      <!-- Сам куб -->
+      <g filter="url(#neon-cyan)">
+        <!-- Верхняя грань -->
+        <polygon points="60,35 82,47 60,59 38,47" fill="url(#cube-top)" stroke="#00F0FF" stroke-width="0.5" />
+        <!-- Левая грань -->
+        <polygon points="38,47 60,59 60,83 38,71" fill="url(#cube-left)" stroke="#00F0FF" stroke-width="0.5" />
+        <!-- Правая грань -->
+        <polygon points="82,47 60,59 60,83 82,71" fill="url(#cube-right)" stroke="#00F0FF" stroke-width="0.5" />
+      </g>
+      <!-- Ядро куба -->
+      <circle cx="60" cy="59" r="3" fill="#FFFFFF" filter="url(#neon-cyan)" />
+    </g>
+
+    <!-- Разделитель -->
+    <line class="accent-line" x1="110" y1="30" x2="110" y2="90" stroke="#00F0FF" stroke-width="1" opacity="0.3" stroke-dasharray="2 4" />
+
+    <!-- Текст и Данные -->
+    <text x="130" y="40" class="title">DECENTRALIZED UPLINK</text>
+    <text x="130" y="72" class="main glow-text">0xavia.xyz</text>
+    
+    <!-- Фейковые Web3 данные -->
+    <text x="130" y="92" class="data">STATUS: <tspan fill="#00FF66">SYNCED</tspan> | BLOCK: #19283749 | LATENCY: 12ms</text>
+    
+    <!-- Индикаторы справа -->
+    <g transform="translate(350, 30)">
+      <circle cx="0" cy="0" r="3" fill="#00FF66" filter="url(#neon-cyan)"/>
+      <text x="-10" y="3" font-family="monospace" font-size="8" fill="#6A7B9C" text-anchor="end">MAINNET</text>
+    </g>
+
+    <!-- Анимированный сканер -->
+    <g clip-path="url(#card-clip)">
+      <rect class="scanner" x="0" y="10" width="40" height="100" fill="url(#scan-grad)" />
+      <line class="scanner" x1="20" y1="10" x2="20" y2="110" stroke="#00F0FF" stroke-width="2" filter="url(#neon-cyan)" />
+    </g>
+  </g>
+</svg>
