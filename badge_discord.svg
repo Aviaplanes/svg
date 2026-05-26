@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="72" viewBox="0 0 360 72">
+  <defs>
+    <style>
+      .btn { cursor: pointer; }
+      .bg { fill: #050508; transition: fill 0.3s; }
+      .btn:hover .bg { fill: #0a0a12; }
+      .text-main { transition: fill 0.3s; }
+      .btn:hover .text-main { fill: #ff2a2a; }
+      
+      @keyframes eq1 { 0%, 100% { height: 4px; y: 34px; } 50% { height: 16px; y: 28px; } }
+      @keyframes eq2 { 0%, 100% { height: 12px; y: 30px; } 50% { height: 24px; y: 24px; } }
+      @keyframes eq3 { 0%, 100% { height: 8px; y: 32px; } 50% { height: 18px; y: 27px; } }
+      
+      .bar1 { animation: eq1 0.8s ease-in-out infinite; }
+      .bar2 { animation: eq2 0.6s ease-in-out infinite 0.1s; }
+      .bar3 { animation: eq3 0.7s ease-in-out infinite 0.2s; }
+      
+      @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+      .cursor { animation: blink 1s step-end infinite; }
+    </style>
+    
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <g class="btn">
+    <!-- База (зеркально скошенная) -->
+    <polygon class="bg" points="0,0 348,0 360,12 360,72 12,72 0,60" />
+    <polygon points="0,0 348,0 360,12 360,72 12,72 0,60" fill="none" stroke="#ff2a2a" stroke-width="1.5" />
+    
+    <!-- Декор -->
+    <rect x="356" y="12" width="4" height="20" fill="#ff2a2a" />
+    <rect x="0" y="40" width="4" height="20" fill="#ff2a2a" />
+    <path d="M 330 4 L 345 4 M 15 68 L 30 68" stroke="#4a0000" stroke-width="2" />
+
+    <!-- Иконка: Чат с эквалайзером -->
+    <g>
+      <!-- Острый пузырь -->
+      <path d="M 16 20 L 56 20 L 56 46 L 42 46 L 36 54 L 30 46 L 16 46 Z" fill="#050508" stroke="#ff2a2a" stroke-width="2" />
+      <path d="M 16 20 L 56 20 L 56 46 L 42 46 L 36 54 L 30 46 L 16 46 Z" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.2" transform="translate(1, 1)" />
+      
+      <!-- Аудио-визуализатор -->
+      <rect class="bar1" x="26" y="34" width="4" height="4" fill="#ffffff" filter="url(#neon)" />
+      <rect class="bar2" x="34" y="30" width="4" height="12" fill="#ff2a2a" filter="url(#neon)" />
+      <rect class="bar3" x="42" y="32" width="4" height="8" fill="#ffffff" filter="url(#neon)" />
+    </g>
+
+    <!-- Разделитель -->
+    <line x1="76" y1="16" x2="76" y2="56" stroke="#4a0000" stroke-width="2" stroke-dasharray="4 4" />
+
+    <!-- Текст -->
+    <text x="92" y="28" font-family="'Courier New', monospace" font-size="10" fill="#ff2a2a" letter-spacing="2" font-weight="bold">COMMS // SECURE</text>
+    <text class="text-main" x="92" y="52" font-family="'Courier New', monospace" font-size="22" fill="#ffffff" font-weight="bold" letter-spacing="1">JOIN SERVER</text>
+    <rect class="cursor" x="235" y="34" width="10" height="20" fill="#ff2a2a" />
+  </g>
+</svg>
