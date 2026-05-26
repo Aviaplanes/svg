@@ -1,0 +1,203 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="360" viewBox="0 0 820 360">
+  <defs>
+    <style>
+      @keyframes spin-3d { 100% { transform: rotateY(360deg); } }
+      @keyframes orbit { 100% { transform: rotate(360deg); } }
+      @keyframes orbit-reverse { 100% { transform: rotate(-360deg); } }
+      @keyframes data-stream { 0% { stroke-dashoffset: 100; } 100% { stroke-dashoffset: 0; } }
+      @keyframes pulse-bar { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; filter: drop-shadow(0 0 8px currentColor); } }
+      
+      .ring-1 { transform-origin: 200px 180px; animation: orbit 20s linear infinite; }
+      .ring-2 { transform-origin: 200px 180px; animation: orbit-reverse 15s linear infinite; }
+      .ring-3 { transform-origin: 200px 180px; animation: orbit 25s linear infinite; }
+      .stream { stroke-dasharray: 10 30; animation: data-stream 2s linear infinite; }
+      
+      .bar-glow { animation: pulse-bar 3s ease-in-out infinite; }
+      
+      .row { cursor: crosshair; }
+      .row:hover .label { fill: #FFFFFF; }
+      .row:hover .val { fill: #FFFFFF; font-weight: bold; }
+      .row:hover .track-bg { stroke: #FFFFFF; }
+
+      .hud-text { font-family: 'JetBrains Mono', monospace; font-size: 10px; fill: #4A5B7C; letter-spacing: 1px; }
+      .label { font-family: 'Inter', sans-serif; font-size: 14px; fill: #8A9BBC; font-weight: 700; letter-spacing: 2px; transition: all 0.3s; }
+      .val { font-family: 'JetBrains Mono', monospace; font-size: 16px; fill: #00F0FF; font-weight: bold; transition: all 0.3s; }
+      .hex { font-family: 'JetBrains Mono', monospace; font-size: 9px; fill: #2A3B5C; }
+    </style>
+
+    <!-- Градиенты -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030308" />
+      <stop offset="50%" stop-color="#070A14" />
+      <stop offset="100%" stop-color="#020205" />
+    </linearGradient>
+
+    <linearGradient id="metal-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A2035" />
+      <stop offset="10%" stop-color="#0A0D1A" />
+      <stop offset="90%" stop-color="#0A0D1A" />
+      <stop offset="100%" stop-color="#1A2035" />
+    </linearGradient>
+
+    <linearGradient id="cyan-neon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0055AA" />
+      <stop offset="50%" stop-color="#00F0FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+    
+    <linearGradient id="purple-neon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A00AA" />
+      <stop offset="50%" stop-color="#B026FF" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+
+    <linearGradient id="pink-neon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AA0055" />
+      <stop offset="50%" stop-color="#FF007F" />
+      <stop offset="100%" stop-color="#FFFFFF" />
+    </linearGradient>
+
+    <!-- Фильтры -->
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-purple" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Паттерны -->
+    <pattern id="iso-grid" width="40" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 0 10 L 20 0 L 40 10 L 20 20 Z" fill="none" stroke="#101525" stroke-width="1" />
+    </pattern>
+    
+    <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="4" y2="0" stroke="#000000" stroke-width="1" opacity="0.3"/>
+    </pattern>
+
+    <!-- Маски для анимации полос -->
+    <mask id="mask-rust"><rect x="420" y="135" width="0" height="16" fill="white"><animate attributeName="width" from="0" to="320" dur="2s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></rect></mask>
+    <mask id="mask-py"><rect x="420" y="205" width="0" height="16" fill="white"><animate attributeName="width" from="0" to="31" dur="2s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></rect></mask>
+    <mask id="mask-js"><rect x="420" y="275" width="0" height="16" fill="white"><animate attributeName="width" from="0" to="18" dur="2s" begin="0.6s" fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1"/></rect></mask>
+  </defs>
+
+  <!-- Глобальный фон -->
+  <rect width="100%" height="100%" fill="url(#bg-grad)" />
+  <rect width="100%" height="100%" fill="url(#iso-grid)" />
+
+  <!-- Металлический корпус терминала -->
+  <path d="M 20 0 L 800 0 L 820 20 L 820 360 L 20 360 L 0 340 L 0 20 Z" fill="url(#metal-frame)" stroke="#1A2035" stroke-width="2" />
+  <path d="M 22 4 L 798 4 L 816 22 L 816 356 L 22 356 L 4 338 L 4 22 Z" fill="none" stroke="#00F0FF" stroke-width="1" opacity="0.2" />
+  
+  <!-- Болты на корпусе -->
+  <g fill="#0A0D1A" stroke="#2A3B5C" stroke-width="1">
+    <circle cx="15" cy="15" r="3" /><circle cx="805" cy="15" r="3" />
+    <circle cx="15" cy="345" r="3" /><circle cx="805" cy="345" r="3" />
+  </g>
+
+  <!-- Верхняя панель (Header) -->
+  <rect x="0" y="0" width="820" height="40" fill="#050710" opacity="0.8" />
+  <line x1="0" y1="40" x2="820" y2="40" stroke="#1A2035" stroke-width="2" />
+  <text x="30" y="25" class="hud-text" fill="#00F0FF" font-weight="bold">SMART CONTRACT ANALYTICS // GAS_EFFICIENCY_PROFILER</text>
+  <text x="790" y="25" class="hud-text" text-anchor="end">SYS.VER: 9.4.2 <tspan fill="#FF007F">[LIVE]</tspan></text>
+  
+  <!-- Декоративные хеши -->
+  <text x="30" y="60" class="hex">TX_HASH: 0x7a2d...f9b1 | BLOCK: 19283749 | GAS_PRICE: 12 GWEI</text>
+
+  <!-- ================= ЛЕВАЯ ЧАСТЬ: 3D CORE ================= -->
+  <g transform="translate(0, 20)">
+    <!-- Фоновое свечение -->
+    <circle cx="200" cy="160" r="100" fill="#00F0FF" opacity="0.05" filter="url(#glow-cyan)" />
+    
+    <!-- Орбитальные кольца -->
+    <ellipse class="ring-1" cx="200" cy="160" rx="110" ry="40" fill="none" stroke="#00F0FF" stroke-width="1" stroke-dasharray="10 20" opacity="0.6" transform="rotate(30 200 160)" />
+    <ellipse class="ring-2" cx="200" cy="160" rx="130" ry="30" fill="none" stroke="#B026FF" stroke-width="1.5" stroke-dasharray="5 15" opacity="0.8" transform="rotate(-45 200 160)" filter="url(#glow-purple)" />
+    <ellipse class="ring-3" cx="200" cy="160" rx="90" ry="90" fill="none" stroke="#FF007F" stroke-width="0.5" stroke-dasharray="2 8" opacity="0.5" />
+    
+    <!-- Центральная сфера (Стилизация под 3D) -->
+    <circle cx="200" cy="160" r="45" fill="#030308" stroke="#00F0FF" stroke-width="2" filter="url(#glow-cyan)" />
+    <path d="M 155 160 A 45 45 0 0 0 245 160" fill="none" stroke="#B026FF" stroke-width="1" opacity="0.5" />
+    <path d="M 200 115 A 45 45 0 0 0 200 205" fill="none" stroke="#00F0FF" stroke-width="1" opacity="0.5" />
+    
+    <!-- Ядро -->
+    <circle cx="200" cy="160" r="15" fill="#00F0FF" filter="url(#glow-cyan)" class="bar-glow" />
+    <circle cx="200" cy="160" r="5" fill="#FFFFFF" />
+
+    <!-- Бегущие потоки данных по кольцам -->
+    <path class="stream" d="M 90 160 A 110 40 30 1 1 310 160 A 110 40 30 1 1 90 160" fill="none" stroke="#FFFFFF" stroke-width="2" filter="url(#glow-cyan)" transform="rotate(30 200 160)" />
+    
+    <text x="200" y="290" class="hud-text" text-anchor="middle" fill="#00F0FF">CONSENSUS_ENGINE: ACTIVE</text>
+  </g>
+
+  <!-- Вертикальный разделитель -->
+  <line x1="380" y1="60" x2="380" y2="320" stroke="#1A2035" stroke-width="2" />
+  <path d="M 375 180 L 385 180 M 375 190 L 385 190 M 375 200 L 385 200" stroke="#00F0FF" stroke-width="1" opacity="0.5" />
+
+  <!-- ================= ПРАВАЯ ЧАСТЬ: DATA BARS ================= -->
+  <g transform="translate(0, 20)">
+    
+    <!-- RUST -->
+    <g class="row">
+      <text x="420" y="120" class="label">RUST_SOLANA</text>
+      <text x="780" y="120" class="val" text-anchor="end" filter="url(#glow-cyan)">86.73%</text>
+      
+      <!-- Трек -->
+      <rect class="track-bg" x="420" y="135" width="360" height="16" fill="#050710" stroke="#1A2035" stroke-width="1" rx="4" />
+      <!-- Засечки на треке -->
+      <path d="M 510 135 v 16 M 600 135 v 16 M 690 135 v 16" stroke="#1A2035" stroke-width="1" />
+      
+      <!-- Заполнение (Неоновая трубка) -->
+      <g mask="url(#mask-rust)">
+        <rect x="420" y="135" width="360" height="16" fill="url(#cyan-neon)" rx="4" class="bar-glow" style="color: #00F0FF;" />
+        <!-- Внутренний блик трубки -->
+        <rect x="420" y="137" width="360" height="4" fill="#FFFFFF" opacity="0.4" rx="2" />
+        <!-- Сегментация -->
+        <path d="M 430 135 v 16 M 440 135 v 16 M 450 135 v 16 M 460 135 v 16 M 470 135 v 16 M 480 135 v 16 M 490 135 v 16 M 500 135 v 16 M 510 135 v 16 M 520 135 v 16 M 530 135 v 16 M 540 135 v 16 M 550 135 v 16 M 560 135 v 16 M 570 135 v 16 M 580 135 v 16 M 590 135 v 16 M 600 135 v 16 M 610 135 v 16 M 620 135 v 16 M 630 135 v 16 M 640 135 v 16 M 650 135 v 16 M 660 135 v 16 M 670 135 v 16 M 680 135 v 16 M 690 135 v 16 M 700 135 v 16 M 710 135 v 16 M 720 135 v 16 M 730 135 v 16 M 740 135 v 16 M 750 135 v 16 M 760 135 v 16 M 770 135 v 16" stroke="#050710" stroke-width="2" opacity="0.5" />
+      </g>
+    </g>
+
+    <!-- PYTHON -->
+    <g class="row">
+      <text x="420" y="190" class="label">PYTHON_CHAIN</text>
+      <text x="780" y="190" class="val" text-anchor="end" fill="#B026FF" filter="url(#glow-purple)">8.45%</text>
+      
+      <rect class="track-bg" x="420" y="205" width="360" height="16" fill="#050710" stroke="#1A2035" stroke-width="1" rx="4" />
+      <path d="M 510 205 v 16 M 600 205 v 16 M 690 205 v 16" stroke="#1A2035" stroke-width="1" />
+      
+      <g mask="url(#mask-py)">
+        <rect x="420" y="205" width="360" height="16" fill="url(#purple-neon)" rx="4" class="bar-glow" style="color: #B026FF;" />
+        <rect x="420" y="207" width="360" height="4" fill="#FFFFFF" opacity="0.4" rx="2" />
+        <path d="M 430 205 v 16 M 440 205 v 16 M 450 205 v 16 M 460 205 v 16 M 470 205 v 16 M 480 205 v 16 M 490 205 v 16 M 500 205 v 16 M 510 205 v 16 M 520 205 v 16 M 530 205 v 16 M 540 205 v 16 M 550 205 v 16 M 560 205 v 16 M 570 205 v 16 M 580 205 v 16 M 590 205 v 16 M 600 205 v 16 M 610 205 v 16 M 620 205 v 16 M 630 205 v 16 M 640 205 v 16 M 650 205 v 16 M 660 205 v 16 M 670 205 v 16 M 680 205 v 16 M 690 205 v 16 M 700 205 v 16 M 710 205 v 16 M 720 205 v 16 M 730 205 v 16 M 740 205 v 16 M 750 205 v 16 M 760 205 v 16 M 770 205 v 16" stroke="#050710" stroke-width="2" opacity="0.5" />
+      </g>
+    </g>
+
+    <!-- JAVASCRIPT -->
+    <g class="row">
+      <text x="420" y="260" class="label">JS_WEB3</text>
+      <text x="780" y="260" class="val" text-anchor="end" fill="#FF007F" filter="url(#glow-pink)">4.82%</text>
+      
+      <rect class="track-bg" x="420" y="275" width="360" height="16" fill="#050710" stroke="#1A2035" stroke-width="1" rx="4" />
+      <path d="M 510 275 v 16 M 600 275 v 16 M 690 275 v 16" stroke="#1A2035" stroke-width="1" />
+      
+      <g mask="url(#mask-js)">
+        <rect x="420" y="275" width="360" height="16" fill="url(#pink-neon)" rx="4" class="bar-glow" style="color: #FF007F;" />
+        <rect x="420" y="277" width="360" height="4" fill="#FFFFFF" opacity="0.4" rx="2" />
+        <path d="M 430 275 v 16 M 440 275 v 16 M 450 275 v 16 M 460 275 v 16 M 470 275 v 16 M 480 275 v 16 M 490 275 v 16 M 500 275 v 16 M 510 275 v 16 M 520 275 v 16 M 530 275 v 16 M 540 275 v 16 M 550 275 v 16 M 560 275 v 16 M 570 275 v 16 M 580 275 v 16 M 590 275 v 16 M 600 275 v 16 M 610 275 v 16 M 620 275 v 16 M 630 275 v 16 M 640 275 v 16 M 650 275 v 16 M 660 275 v 16 M 670 275 v 16 M 680 275 v 16 M 690 275 v 16 M 700 275 v 16 M 710 275 v 16 M 720 275 v 16 M 730 275 v 16 M 740 275 v 16 M 750 275 v 16 M 760 275 v 16 M 770 275 v 16" stroke="#050710" stroke-width="2" opacity="0.5" />
+      </g>
+    </g>
+  </g>
+
+  <!-- Нижняя панель (Footer) -->
+  <rect x="0" y="320" width="820" height="40" fill="#050710" opacity="0.8" />
+  <line x1="0" y1="320" x2="820" y2="320" stroke="#1A2035" stroke-width="2" />
+  <text x="30" y="345" class="hud-text">MEM_ALLOC: 0x00F8A2 | THREADS: 12 | STATUS: <tspan fill="#00FF66">VERIFIED</tspan></text>
+  <text x="790" y="345" class="hud-text" text-anchor="end">NO MERCY · PROPRIETARY LOGIC</text>
+
+  <!-- Scanlines Overlay -->
+  <rect width="100%" height="100%" fill="url(#scanlines)" style="pointer-events: none;" />
+</svg>
